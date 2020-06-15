@@ -18,6 +18,12 @@ Chat.prototype.init = function() {
     this.show();
 }
 
+Chat.prototype.destroy = function() {
+    this.headerElement.remove();
+    this.messageListElement.remove();
+    this.messageInputElement.remove();
+}
+
 Chat.prototype.initHeader = function(parent, {title, description}) {
     this.headerElement = document.createElement('div');
     this.headerElement.className = 'header';
@@ -70,9 +76,12 @@ Chat.prototype.pushToMsgList = function(msg) {
         console.log(this.messages);
 }
 
-Chat.prototype.flushMsgList = function() {
+Chat.prototype._clearMessageList = function() {
     this.messages = [];
-    this.messageListElement.innerHTML = '';
+    let messagesElements = this.messageListElement.children;
+    for (let i = messagesElements.length - 1; i >= 0; i--) {
+        messagesElements[i].remove();
+     }
 }
 
 Chat.prototype.handleUserMessage = function({msg}) {

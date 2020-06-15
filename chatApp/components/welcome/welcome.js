@@ -30,6 +30,10 @@ Welcome.prototype.init = function() {
     //this.show();
 }
 
+Welcome.prototype.destroy = function() {
+    // TBD
+}
+
 Welcome.prototype.initHeader = function(parent, {title}) {
     this.headerElement = document.createElement('div');
     this.headerElement.className = 'header';

@@ -19,11 +19,9 @@ window.onload = function handleContainerLoad() {
 
     toolbar.onClose = function closeChat() {
         welcome.show();
-        chat.hide();
-        chat.flushMsgList();
 
-        // welcome.destroy();
-        // chat.destroy();
+        chat.hide();
+        chat.destroy();
 
         window.parent.postMessage({ msg: 'close' }, '*');
     }

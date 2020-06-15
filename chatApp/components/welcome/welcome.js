@@ -30,10 +30,6 @@ Welcome.prototype.init = function() {
     //this.show();
 }
 
-Welcome.prototype.destroy = function() {
-    // TBD
-}
-
 Welcome.prototype.initHeader = function(parent, {title}) {
     this.headerElement = document.createElement('div');
     this.headerElement.className = 'header';
@@ -67,6 +63,7 @@ Welcome.prototype.startChat = function(data = {}) {
     const userMessage = data.msg || this.messageBox.getMessage();
 
     if (userMessage) {
+        this.messageBox.clear();
         if (this.onStartChat) {
             this.onStartChat(userMessage);
         }

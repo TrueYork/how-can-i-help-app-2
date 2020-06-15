@@ -1,5 +1,5 @@
-let chatIconElement;
-let chatIFrameElement;
+var chatIconElement;
+var chatIFrameElement;
 
 window.onload = function handleAppLoad() {
     chatIconElement = document.getElementById('chat-icon');
@@ -11,10 +11,8 @@ window.onload = function handleAppLoad() {
     }
 };
 
-window.addEventListener('message', ({ data }) => {
-    const { msg } = data;
-
-    switch (msg) {
+window.addEventListener('message', function (data) {
+    switch (data.data.msg) {
         case 'close':
             {
                 chatIFrameElement.style.display = 'none';

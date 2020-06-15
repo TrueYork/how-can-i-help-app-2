@@ -51,7 +51,7 @@ Chat.prototype.pushToMsgListOnEnter = function() {
 }
 
 Chat.prototype.show = function() {
-    const chatStyle = {
+    var chatStyle = {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '0'

@@ -4,11 +4,11 @@ import Chat from './components/chat.js';
 
 window.onload = function handleContainerLoad() {
     // Get container for inner views
-    const parentContainerElement = document.getElementById('main');
+    var parentContainerElement = document.getElementById('main');
     // Init views
-    const toolbar = new Toolbar(parentContainerElement, '.toolbar');
-    const welcome = new Welcome(parentContainerElement, '.welcome');
-    const chat = new Chat(parentContainerElement, '.chat');
+    var toolbar = new Toolbar(parentContainerElement, '.toolbar');
+    var welcome = new Welcome(parentContainerElement, '.welcome');
+    var chat = new Chat(parentContainerElement, '.chat');
 
     // Define some intercommunications
     welcome.onStartChat = function startChat(startMsg) {

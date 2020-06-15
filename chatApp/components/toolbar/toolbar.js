@@ -4,20 +4,13 @@ function Toolbar(parent, selector) {
     this.closeButton = new ToolbarButton(this.element, 'close');
     this.closeButton.handleClick = this.close.bind(this);
 
-    this.closeButton = new ToolbarButton(this.element, 'shrink');
+    this.closeButton = new ToolbarButton(this.element, 'minimize');
 
     this.closeButton = new ToolbarButton(this.element, 'expand');
 }
 
 Toolbar.prototype.close = function() {
-    window.parent.postMessage({ msg: 'close' }, '*');
-    this.closeChat();
-}
-
-Toolbar.prototype.closeChat = function () {
-    if (this.onCloseChat) {
-        this.onCloseChat();
-    }
+    if (this.onClose) this.onClose();
 }
 
 function ToolbarButton(parent, className) {

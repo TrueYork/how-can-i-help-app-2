@@ -1,0 +1,67 @@
+.chat {
+    display: none;
+    padding: 0 10px 0 10px;
+    height: 100%;
+}
+
+.chat.visible {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat .header {
+    flex: none;
+}
+
+.chat .header .title {
+    font: 20pt Verdana, sans-serif;
+    margin: 0px;
+}
+
+.chat .header .description {
+    font: 10pt Verdana, sans-serif;
+    margin: 0px;
+    opacity: 0.6;
+}
+
+.chat .message-box:focus {
+    outline: none;
+}
+
+.chat .message-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    /* Hack */
+    height: 0px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.chat .message-list .msg-item {
+    max-width: 60%;
+    word-wrap: break-word;
+    margin: 6px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px #A2A2A2;
+    padding: 2px 5px 2px 5px;
+    font: 10pt Verdana, sans-serif;
+    color: rgba(0, 0, 0, 0.6);
+    
+}
+
+.chat .message-list .msg-item.sent {
+    align-self: flex-end;
+    background-color: #AFFFE6;
+}
+
+.chat .message-list .msg-item.recieved {
+    align-self: flex-start;
+    background-color: #FFFCAF;
+}
+
+.chat .message-input {
+    flex: none;
+    height: 50px;
+    margin-bottom: 10px;
+}

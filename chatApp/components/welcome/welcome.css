@@ -44,3 +44,7 @@
 .welcome .message-box:focus {
     outline: none;
 }
+
+.welcome .message-box-holder {
+    margin: 10px 0;
+}

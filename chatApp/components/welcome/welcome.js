@@ -6,7 +6,10 @@ function Welcome(parent, selector) {
     // this.welcomeText = 'Help us understanding your problem...';
     // this.welcomeViewDescr = new ViewDescr(this.element, this.welcomeText, 'head-text');
     this.init();
-    this.messageBox = new MessageBox(this.element, {
+    this.messageBoxHolder = document.createElement('div');
+    this.messageBoxHolder.classList.add('message-box-holder');
+    this.element.appendChild(this.messageBoxHolder);
+    this.messageBox = new MessageBox(this.messageBoxHolder, {
         placeholderText: 'Type a few words about your issue here and click "Start Chat"'
     });
     this.messageBox.handleUserMessage = this.startChat.bind(this);

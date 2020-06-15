@@ -10,7 +10,7 @@
     display: none;
 }
 
-.welcome .head-text {
+.welcome .header .title {
     font: 20pt Verdana, sans-serif;
     margin-top: 0px;
     margin-right: 50px;
@@ -43,4 +43,9 @@
 
 .welcome .message-box:focus {
     outline: none;
+}
+
+.welcome .message-box-holder {
+    height: 100%;
+    margin: 10px 0;
 }

@@ -1,12 +1,15 @@
 import MessageBox from '../messageBox/messageBox.js';
 
+const MESSAGE_TYPES = {
+    SENT: 'sent',
+    RECIEVED: 'recieved'
+};
+
 function Chat(parent, selector) {
     this.element = parent.querySelector(selector);
 }
 
-Chat.prototype.init = function() {
-    this.messages = [];
-
+Chat.prototype.init = function({userMessage}) {
     this.initHeader(this.element, {
         title: 'Bill Gates',
         description: 'Sales Support Department',
@@ -16,6 +19,14 @@ Chat.prototype.init = function() {
     this.initMessageInput(this.element);
 
     this.show();
+
+    this.handleUserMessage({msg: userMessage});
+}
+
+Chat.prototype.destroy = function() {
+    if (this.headerElement) this.headerElement.remove();
+    if (this.messageListElement) this.messageListElement.remove();
+    if (this.messageInputElement) this.messageInputElement.remove();
 }
 
 Chat.prototype.initHeader = function(parent, {title, description}) {
@@ -55,28 +66,32 @@ Chat.prototype.initMessageInput = function(parent) {
     parent.appendChild(this.messageInputElement);
 }
 
-Chat.prototype.pushToMsgList = function(msg) {
-        this.messages.push(msg);
-        this.msgToPush = document.createElement('div');
-        this.msgToPush.classList = 'msg-item';
-        if (msg.id) {
-            this.msgToPush.classList.add('sent');
-        } else {
-            this.msgToPush.classList.add('recieved');
-        }
-        this.msgToPush.textContent = msg.data;
+Chat.prototype.displayMessage = function({type, msg}) {
+    this.messageElement = document.createElement('div');
+    this.messageElement.className = 'msg-item';
+    this.messageElement.classList.add(type);
 
-        this.messageListElement.appendChild(this.msgToPush);
-        console.log(this.messages);
+    this.messageElement.textContent = msg;
+
+    this.messageListElement.appendChild(this.messageElement);
+
+    this.messageListElement.scrollTo(0, this.messageListElement.scrollHeight);
 }
 
-Chat.prototype.flushMsgList = function() {
-    this.messages = [];
-    this.messageListElement.innerHTML = '';
+Chat.prototype.onMessage = function(msg) {
+    this.displayMessage({type: MESSAGE_TYPES.RECIEVED, msg})
+}
+
+Chat.prototype.clearMessageList = function() {
+    Array.from(this.messageListElement.children).forEach(element => {
+        element.remove();
+    });
 }
 
 Chat.prototype.handleUserMessage = function({msg}) {
-    this.pushToMsgList({id: 1, data: msg});
+    this.displayMessage({type: MESSAGE_TYPES.SENT, msg});
+
+    if (this.onUserMessage) this.onUserMessage({msg});
 }
 
 Chat.prototype.show = function() {

@@ -1,6 +1,7 @@
 .message-box {
     height: 100%;
     width: 100%;
+    margin: 10px 0;
     resize: none;
     box-sizing: border-box;
     border: 2px solid #25B5FF;

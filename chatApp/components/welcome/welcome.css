@@ -10,7 +10,7 @@
     display: none;
 }
 
-.welcome .head-text {
+.welcome .header .title {
     font: 20pt Verdana, sans-serif;
     margin-top: 0px;
     margin-right: 50px;

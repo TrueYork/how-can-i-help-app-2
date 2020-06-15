@@ -2,27 +2,59 @@ import Toolbar from './components/toolbar/toolbar.js';
 import Welcome from './components/welcome/welcome.js';
 import Chat from './components/chat/chat.js';
 
-window.onload = function handleContainerLoad() {
-    // Get container for inner views
-    var parentContainerElement = document.getElementById('main');
-    // Init views
-    var toolbar = new Toolbar(parentContainerElement, '.toolbar');
-    var welcome = new Welcome(parentContainerElement, '.welcome');
-    var chat = new Chat(parentContainerElement, '.chat');
+import MessagingService from './services/messagingService.js';
 
-    // Define some intercommunications
-    welcome.onStartChat = function startChat(startMsg) {
-        welcome.hide();
-        chat.init();
-        chat.pushToMsgList({id: 0, data: startMsg});
-    }
-
-    toolbar.onClose = function closeChat() {
-        welcome.show();
-
-        chat.hide();
-        chat.destroy();
-
-        window.parent.postMessage({ msg: 'close' }, '*');
-    }
+function ChatApp() {
+    this.initViews();
+    this.initServices();
 }
+
+ChatApp.prototype.initViews = function() {
+    const parentContainerElement = document.getElementById('main');
+
+    this.toolbar = new Toolbar(parentContainerElement, '.toolbar');
+    this.welcome = new Welcome(parentContainerElement, '.welcome');
+    this.chat = new Chat(parentContainerElement, '.chat');
+
+    this.welcome.onStartChat = this.startChat.bind(this);
+    this.toolbar.onClose = this.close.bind(this);
+}
+
+ChatApp.prototype.initServices = function() {
+    this.messagingService = new MessagingService();
+}
+
+ChatApp.prototype.startChat = function(userMessage) {
+    this.messagingService.init();
+
+    this.chat.onUserMessage = this.onUserMessage.bind(this);
+    this.messagingService.onMessage = this.onServerMessage.bind(this);
+
+    this.switchToChatView(userMessage);
+}
+
+ChatApp.prototype.switchToChatView = function(userMessage) {
+    this.welcome.hide();
+    this.chat.init({userMessage});
+}
+
+ChatApp.prototype.onUserMessage = function(data) {
+    this.messagingService.sendMessage(data);
+}
+
+ChatApp.prototype.onServerMessage = function(msg) {
+    this.chat.onMessage(msg);
+}
+
+ChatApp.prototype.close = function() {
+    this.welcome.show();
+
+    this.chat.hide();
+    this.chat.destroy();
+
+    this.messagingService.destroy();
+
+    window.parent.postMessage({ msg: 'close' }, '*');
+}
+
+export default ChatApp;

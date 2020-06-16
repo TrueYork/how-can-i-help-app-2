@@ -11,6 +11,10 @@ function MessageBox(parent, {placeholderText}) {
     parent.appendChild(this.element);
 }
 
+MessageBox.prototype.clear = function(event) {
+        this.element.value = '';
+}
+
 MessageBox.prototype.onKeyDown = function(event) {
     if (event.keyCode === ENTER_KEY_CODE && !event.shiftKey) {
         event.preventDefault();

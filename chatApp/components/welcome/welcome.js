@@ -68,6 +68,7 @@ Welcome.prototype.startChat = function(data = {}) {
     const userMessage = data.msg || this.messageBox.getMessage();
 
     if (userMessage) {
+       this.messageBox.clear();
         if (this.onStartChat) {
             this.onStartChat(userMessage);
         }

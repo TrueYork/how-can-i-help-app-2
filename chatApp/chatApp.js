@@ -36,7 +36,6 @@ ChatApp.prototype.startChat = function(userMessage) {
 
 ChatApp.prototype.switchToChatView = function(userMessage) {
     this.welcome.hide();
-    //this.welcome.destroy();
     this.chat.init({userMessage});
 }
 
@@ -49,15 +48,14 @@ ChatApp.prototype.onServerMessage = function(msg) {
 }
 
 ChatApp.prototype.close = function() {
-    this.welcome.show();
-    //this.welcome.destroy();
-
+    window.parent.postMessage({ msg: 'close' }, '*');
+    
     this.chat.hide();
     this.chat.destroy();
-
+    
     this.messagingService.destroy();
-
-    window.parent.postMessage({ msg: 'close' }, '*');
+    
+    this.welcome.show();
 }
 
 export default ChatApp;

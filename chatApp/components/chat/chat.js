@@ -82,11 +82,11 @@ Chat.prototype.onMessage = function(msg) {
     this.displayMessage({type: MESSAGE_TYPES.RECIEVED, msg})
 }
 
-Chat.prototype.clearMessageList = function() {
-    Array.from(this.messageListElement.children).forEach(element => {
-        element.remove();
-    });
-}
+// Chat.prototype.clearMessageList = function() {
+//     Array.from(this.messageListElement.children).forEach(function(element) {
+//         element.remove();
+//     });
+// }
 
 Chat.prototype.handleUserMessage = function({msg}) {
     this.displayMessage({type: MESSAGE_TYPES.SENT, msg});

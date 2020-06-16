@@ -15,7 +15,7 @@ Toolbar.prototype.close = function() {
 
 function ToolbarButton(parent, className) {
     this.element = document.createElement('button');
-    this.element.className = `toolbar-button ${className}`;
+    this.element.className = 'toolbar-button ' + className;
 
     this.element.onclick = this.onClick.bind(this);
 

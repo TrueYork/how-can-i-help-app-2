@@ -16,6 +16,7 @@ ChatApp.prototype.initViews = function() {
     this.welcome = new Welcome(parentContainerElement, '.welcome');
     this.chat = new Chat(parentContainerElement, '.chat');
 
+    this.welcome.init();
     this.welcome.onStartChat = this.startChat.bind(this);
     this.toolbar.onClose = this.close.bind(this);
 }
@@ -35,6 +36,7 @@ ChatApp.prototype.startChat = function(userMessage) {
 
 ChatApp.prototype.switchToChatView = function(userMessage) {
     this.welcome.hide();
+    //this.welcome.destroy();
     this.chat.init({userMessage});
 }
 
@@ -48,6 +50,7 @@ ChatApp.prototype.onServerMessage = function(msg) {
 
 ChatApp.prototype.close = function() {
     this.welcome.show();
+    //this.welcome.destroy();
 
     this.chat.hide();
     this.chat.destroy();

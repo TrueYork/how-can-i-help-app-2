@@ -8,24 +8,24 @@
 
 .toolbar .toolbar-button {
     border-radius: 50%;
-    width: 15px;
-    height: 15px;
+    width: 19px;
+    height: 19px;
     cursor: pointer;
 }
 
 .toolbar .toolbar-button.close {
-    border: 2px solid #EE5F56;
+    border: 4px solid #EE5F56;
     box-shadow: 0px 0px 5px #EE5F56;
 }
 
 .toolbar .toolbar-button.minimize {
-    border: 2px solid #F8BD45;
+    border: 4px solid #F8BD45;
     box-shadow: 0px 0px 5px #F8BD45;
     margin-left: 5px;
 }
 
 .toolbar .toolbar-button.expand {
-    border: 2px solid #5ECB43;
+    border: 4px solid #5ECB43;
     box-shadow: 0px 0px 5px #5ECB43;
     margin-left: 5px;
 }

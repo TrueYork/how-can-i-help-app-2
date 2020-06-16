@@ -34,7 +34,7 @@ Welcome.prototype.initMessageInput = function(parent) {
     this.messageBox = new MessageBox(this.messageBoxHolder, {
         placeholderText: 'Type a few words about your issue here and click "Start Chat"'
     });
-    //this.messageBox.handleUserMessage = this.startChat.bind(this);
+    this.messageBox.handleUserMessage = this.startChat.bind(this);
 
     parent.appendChild(this.messageBoxHolder);
 }
@@ -68,7 +68,7 @@ Welcome.prototype.startChat = function(data = {}) {
     const userMessage = data.msg || this.messageBox.getMessage();
 
     if (userMessage) {
-        this.messageBox.clear();
+       this.messageBox.clear();
         if (this.onStartChat) {
             this.onStartChat(userMessage);
         }

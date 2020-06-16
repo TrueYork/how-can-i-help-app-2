@@ -1,24 +1,77 @@
-var chatIconElement;
-var chatIFrameElement;
+(function () {
+    const chatIFrameStyles = {
+        position: 'fixed',
+        right: '0',
+        bottom: '0',
+        width: '350px',
+        height: '490px',
+        border: 'none',
+        display: 'none'
+    };
 
-window.onload = function handleAppLoad() {
-    chatIconElement = document.getElementById('chat-icon');
-    chatIFrameElement = document.getElementById('chat');
+    const chatIconStyles = {
+        position: 'fixed',
+        right: '15px',
+        bottom: '15px',
+        width: '100px',
+        height: '100px',
+        lineHeight: '100px',
+        textAlign: 'center',
+        backgroundColor: '#CB6EF2',
+        border: 'none',
+        borderRadius: '50%',
+        color: 'white',
+        boxShadow: '0 0 15px #FF00CC',
+        fontSize: '3em',
+        cursor: 'pointer',
+        userSelect: 'none'
+    };
 
-    chatIconElement.onclick = function handleChatIconClick() {
-        chatIconElement.style.display = 'none';
-        chatIFrameElement.style.display = 'block';
-    }
-};
+    const chatIconInteractionStyles = '#chat-icon:hover {' +
+        'opacity: 0.7;' +
+        'height: 150px;' +
+        '}' +
+        '#chat-icon:active {' +
+        'border: none;' +
+        'opacity: 0.5;' +
+        '}' +
+        '#chat-icon:focus {' +
+        'outline: none;' +
+        '}';
 
-window.addEventListener('message', function (data) {
-    switch (data.data.msg) {
-        case 'close':
-            {
-                chatIFrameElement.style.display = 'none';
-                chatIconElement.style.display = 'block';
+    window.addEventListener('load', function handleAppLoad() {
+        const style = document.createElement('style');
+        style.innerHTML = chatIconInteractionStyles;
+        document.head.appendChild(style);
 
-                break;
+        const chatIconElement = document.createElement('button');
+        chatIconElement.setAttribute('id', 'chat-icon');
+        chatIconElement.innerHTML = '?';
+        Object.assign(chatIconElement.style, chatIconStyles);
+
+        const chatIFrameElement = document.createElement('iframe');
+        chatIFrameElement.setAttribute('id', 'chat');
+        chatIFrameElement.setAttribute('src', './chatApp/chatApp.html');
+        Object.assign(chatIFrameElement.style, chatIFrameStyles);
+
+        chatIconElement.onclick = function handleChatIconClick() {
+            chatIFrameElement.style.display = 'block';
+            chatIconElement.style.display = 'none';
+        }
+
+        document.body.appendChild(chatIconElement);
+        document.body.appendChild(chatIFrameElement);
+
+        window.addEventListener('message', function (event) {
+            switch (event.data.msg) {
+                case 'close':
+                    {
+                        chatIFrameElement.style.display = 'none';
+                        chatIconElement.style.display = 'block';
+    
+                        break;
+                    }
             }
-    }
-}, false)
+        }, false);
+    });
+})();
